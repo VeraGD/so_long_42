@@ -6,7 +6,7 @@
 /*   By: veragarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:09:25 by veragarc          #+#    #+#             */
-/*   Updated: 2024/10/11 12:09:28 by veragarc         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:45:36 by veragarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,25 +84,25 @@ static char	*fill_line_buffer(int fd, char *stash, char *buffer)
 	return (stash);
 } */
 
-static char *set_line(char *line_buffer)
+static char	*set_line(char *line_buffer)
 {
-    size_t i;
-    char *stash;
+	size_t	i;
+	char	*stash;
 
-    i = 0;
-    while (line_buffer[i] != '\0' && line_buffer[i] != '\n')
-        i++;
-    if (line_buffer[i] == '\n')
-        stash = ft_substr(line_buffer, i + 1, ft_strlen(line_buffer) - i - 1);
-    else
-        stash = NULL;
-    line_buffer[i] = '\0';
-    if (stash && *stash == '\0')
-    {
-        free(stash);
-        stash = NULL;
-    }
-    return (stash);
+	i = 0;
+	while (line_buffer[i] != '\0' && line_buffer[i] != '\n')
+		i++;
+	if (line_buffer[i] == '\n')
+		stash = ft_substr(line_buffer, i + 1, ft_strlen(line_buffer) - i - 1);
+	else
+		stash = NULL;
+	line_buffer[i] = '\0';
+	if (stash && *stash == '\0')
+	{
+		free(stash);
+		stash = NULL;
+	}
+	return (stash);
 }
 
 char	*get_next_line(int fd)
