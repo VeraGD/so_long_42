@@ -17,11 +17,14 @@ typedef struct s_map
 	char **map;
 }	t_map;
 
+size_t	ft_strlen_gnl(const char *str);
 size_t	ft_strlen(const char *str);
+char	*ft_strdup_gnl(const char *src);
 char	*ft_strdup(const char *src);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substr_gnl(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin_gnl(char const *s1, char const *s2);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *s, int c);
+char	*ft_strchr_gnl(const char *s, int c);
 char	**ft_split(char const *s, char c);
 char	*get_next_line(int fd);
 

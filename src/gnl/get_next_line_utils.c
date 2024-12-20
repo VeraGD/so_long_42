@@ -12,7 +12,7 @@
 
 #include "../../so_long.h"
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen_gnl(const char *str)
 {
 	size_t	i;
 
@@ -22,13 +22,13 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup_gnl(const char *src)
 {
 	size_t	i;
 	size_t	j;
 	char	*copy;
 
-	i = ft_strlen(src);
+	i = ft_strlen_gnl(src);
 	copy = (char *)malloc(i + 1);
 	if (copy == NULL)
 		return (NULL);
@@ -42,17 +42,17 @@ char	*ft_strdup(const char *src)
 	return (copy);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr_gnl(char const *s, unsigned int start, size_t len)
 {
 	char	*res;
 	size_t	i;
 
 	if (s == NULL)
 		return (NULL);
-	if (start > ft_strlen(s))
-		return (ft_strdup(""));
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
+	if (start > ft_strlen_gnl(s))
+		return (ft_strdup_gnl(""));
+	if (len > ft_strlen_gnl(s + start))
+		len = ft_strlen_gnl(s + start);
 	res = (char *)malloc(len + 1);
 	if (res == NULL)
 		return (NULL);
@@ -66,7 +66,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (res);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_gnl(char const *s1, char const *s2)
 {
 	char	*res;
 	size_t	i;
@@ -74,17 +74,17 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	res = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	res = (char *)malloc(ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1);
 	i = 0;
 	if (res == NULL)
 		return (NULL);
-	while (i < ft_strlen(s1))
+	while (i < ft_strlen_gnl(s1))
 	{
 		res[i] = s1[i];
 		i++;
 	}
 	j = 0;
-	while (j < ft_strlen(s2))
+	while (j < ft_strlen_gnl(s2))
 	{
 		res[i] = s2[j];
 		j++;
@@ -94,7 +94,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (res);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr_gnl(const char *s, int c)
 {
 	int		i;
 	char	*res;

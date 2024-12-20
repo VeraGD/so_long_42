@@ -30,12 +30,12 @@ static char	*fill_line_buffer(int fd, char *stash, char *buffer)
 			break ;
 		buffer[bytes] = '\0';
 		if (stash == NULL)
-			stash = ft_strdup("");
+			stash = ft_strdup_gnl("");
 		temp = stash;
-		stash = ft_strjoin(temp, buffer);
+		stash = ft_strjoin_gnl(temp, buffer);
 		free(temp);
 		temp = NULL;
-		if (ft_strchr(stash, '\n') != NULL)
+		if (ft_strchr_gnl(stash, '\n') != NULL)
 			break ;
 	}
 	return (stash);
@@ -93,7 +93,7 @@ static char	*set_line(char *line_buffer)
 	while (line_buffer[i] != '\0' && line_buffer[i] != '\n')
 		i++;
 	if (line_buffer[i] == '\n')
-		stash = ft_substr(line_buffer, i + 1, ft_strlen(line_buffer) - i - 1);
+		stash = ft_substr_gnl(line_buffer, i + 1, ft_strlen_gnl(line_buffer) - i - 1);
 	else
 		stash = NULL;
 	line_buffer[i] = '\0';
