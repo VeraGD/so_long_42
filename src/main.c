@@ -1,216 +1,80 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "../so_long.h"
 #include "../lib/MLX42/include/MLX42/MLX42.h"
-#define WIDTH 256
-#define HEIGHT 256
 
-/* typedef struct mlx
+/* void close_window(void *param)
 {
-	void*		window;
-	void*		context;
-	int32_t		width;
-	int32_t		height;
-	double		delta_time;
-}	mlx_t; */
-
-
-// Print the window width and height.
-/* static void ft_hook(void* param)
-{
-	const mlx_t* mlx = param;
-
-	printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
+    t_data *data = (t_data *)param;
+    ft_printf("Ventana cerrada.\n");
+    free_data(data); // Libera todos los recursos
+    mlx_terminate(data->window->mlx); // Termina la conexión con MLX
+    exit(0);
 } */
 
-/* void	hook(void *param)
+int     main(int argc, char **argv)
+{
+    int     fd;
+    char    *map;
+    t_data *data;
+    t_window    *window;
+
+    map = 0;
+    if (argc == 2)
+    {
+        fd = check_map_existance(argv[1]);
+        if (fd != -1)
+        {
+            map = get_map(fd);
+            if (map)
+            {
+                if (check_chars(map) == 0 && check_number_chars(map) == 0 && check_walls(map) == 0 && check_way(map) == 0)
+                {
+                        ft_printf("%s\n", map);
+                        ft_printf("entra");
+                        data = initiaize_data(map);
+                        /* ft_printf("size: %d, %d\n", data->size[0], data->size[1]);
+                        ft_printf("coord: %d, %d\n", data->coor_char[0], data->coor_char[1]);
+                        ft_printf("coord: %d, %d\n", data->coor_exit[0], data->coor_exit[1]);
+                        ft_printf("collectionales: %d\n", data->collectionables);
+                        ft_printf("first_line: %s\n", data->map[0]); */
+                        window = data->window;
+                        rendering(data, window);
+                        mlx_key_hook(window->mlx, handle_input, data);
+                        //mlx_hook(window->mlx, 17, 0, close_window, data);
+                        mlx_loop(window->mlx);
+                        free(map);
+                        /* free_split(data->map);
+                        free(data->coor_char);
+                        free(data->size);
+                        free(data);
+                        free_window(window); */
+                        free_data(data); // YA ESTOY LIBERANDO WINDOW CON ESTO (DOS WINDOW)
+                        mlx_terminate(window->mlx);
+                }
+                else
+                {
+                    ft_printf("Error\n");
+                    free(map);
+                }
+            }
+            else
+            {
+                ft_printf("Error\n");
+                free(map);
+            }
+        }
+        else
+            ft_printf("Insert a valid map\n");
+    }
+    else
+        ft_printf("Invalid number of arguments\n");
+}
+
+// The memory leaks came from the MLX42 library
+/* int	main(void)
 {
 	mlx_t	*mlx;
 
-	mlx = param;
-	if (mlx_is_key_down(param, MLX_KEY_ESCAPE))
-		mlx_close_window(param);
-	if (mlx_is_key_down(param, MLX_KEY_UP))
-		printf("UP");
-	if (mlx_is_key_down(param, MLX_KEY_DOWN))
-		printf("DOWN");
-	if (mlx_is_key_down(param, MLX_KEY_LEFT))
-		printf("LEFT");
-	if (mlx_is_key_down(param, MLX_KEY_RIGHT))
-		printf("RIGHT");
-}
-
-int32_t	main(void)
-{
-
-	// MLX allows you to define its core behaviour before startup.
-	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", true);
-	if (!mlx)
-		ft_error();
-
-	// Create and display the image.
-	mlx_image_t* img = mlx_new_image(mlx, 5, 5);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-		ft_error();
-
-	// Even after the image is being displayed, we can still modify the buffer.
-	mlx_put_pixel(img, 0, 0, 0x00FF00);
-
-	// Register a hook and pass mlx as an optional param.
-	// NOTE: Do this before calling mlx_loop!
-	mlx_loop_hook(mlx, hook, mlx);
-	mlx_loop(mlx);
+	mlx = mlx_init(1920, 1080, "Title", true);
 	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
+	return (0);
 } */
-
-/* #define BPP sizeof(int32_t)
-#include <stdlib.h>
-#include <string.h>
-
-int get_rgba(int r, int g, int b, int a)
-{
-    return (r << 24 | g << 16 | b << 8 | a);
-}
-
-int32_t	main(void)
-{
-    // Init mlx with a canvas size of 256x256 and the ability to resize the window.
-    mlx_t* mlx = mlx_init(256, 256, "MLX42", true);
-    
-    if (!mlx) exit(EXIT_FAILURE);
-
-    // Create a 128x128 image.
-    mlx_image_t* img = mlx_new_image(mlx, 128, 128);
-
-    // Set the channels of each pixel in our image to the maximum byte value of 255. 
-    memset(img->pixels, 200, img->width * img->height * BPP);
-
-    // Draw the image at coordinate (0, 0).
-    mlx_image_to_window(mlx, img, 10, 0);
-
-    // Run the main loop and terminate on quit.  
-    mlx_loop(mlx);
-    mlx_terminate(mlx);
-
-    return (EXIT_SUCCESS);
-} */
-
-static void error(void)
-{
-	puts(mlx_strerror(mlx_errno));
-	exit(EXIT_FAILURE);
-}
-
-int32_t	main(void)
-{
-	// Start mlx
-	mlx_t* mlx = mlx_init(400, 400, "Vaquita feliz", true);
-	if (!mlx)
-        error();
-
-	// Try to load the file
-	mlx_texture_t* texture = mlx_load_png("imgs/vaca_l.png");
-	if (!texture)
-        error();
-
-	mlx_texture_t* texture2 = mlx_load_png("imgs/arbusto_b.png");
-	if (!texture)
-        error();
-
-	mlx_texture_t* texture3 = mlx_load_png("imgs/puerta_a.png");
-	if (!texture)
-        error();
-
-	mlx_texture_t* texture4 = mlx_load_png("imgs/adn_b.png");
-	if (!texture)
-        error();
-
-	mlx_texture_t* texture5 = mlx_load_png("imgs/fondo_b.png");
-	if (!texture)
-        error();
-
-	
-	// Convert texture to a displayable image
-	mlx_image_t* img = mlx_texture_to_image(mlx, texture);
-	if (!img)
-        error();
-
-	// Convert texture to a displayable image arbusto
-	mlx_image_t* ar = mlx_texture_to_image(mlx, texture2);
-	if (!img)
-        error();
-
-	mlx_image_t* pu = mlx_texture_to_image(mlx, texture3);
-	if (!img)
-        error();
-
-	mlx_image_t* adn = mlx_texture_to_image(mlx, texture4);
-	if (!img)
-        error();
-
-	mlx_image_t* ff = mlx_texture_to_image(mlx, texture5);
-	if (!img)
-        error();
-
-	// Display the image
-	if (mlx_image_to_window(mlx, ar, 0, 0) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, ar, 100, 0) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, ar, 200, 0) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, ar, 300, 0) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, ar, 0, 100) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, ar, 0, 200) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, ar, 0, 300) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, ar, 300, 0) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, ar, 300, 100) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, ar, 300, 200) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, ar, 300, 300) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, ar, 100, 300) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, ar, 200, 300) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, pu, 100, 200) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, adn, 200, 100) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, ff, 200, 200) < 0)
-        error();
-
-	if (mlx_image_to_window(mlx, img, 100, 100) < 0)
-        error();
-
-	mlx_loop(mlx);
-
-	// Optional, terminate will clean up any leftovers, this is just to demonstrate.
-	mlx_delete_image(mlx, img);
-	mlx_delete_texture(texture);
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
-}

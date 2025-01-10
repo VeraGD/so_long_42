@@ -40,3 +40,104 @@ void	free_map_number(char **copy, size_t j)
 	}
 	free(copy);
 }
+
+/* void	free_window(t_window *window)
+{
+	if (window)
+	{
+		if (window->mlx != NULL)
+			free(window->mlx);
+		if (window->wall != NULL)
+			free(window->wall);
+		if (window->floor != NULL)
+			free(window->floor);
+		if (window->player != NULL)
+			free(window->player);
+		if (window->collectible != NULL)
+			free(window->collectible);
+		if (window->exit_close != NULL)
+			free(window->exit_close);
+		if (window->exit_open != NULL)
+			free(window->exit_open);
+		free(window);
+		window = NULL;
+	}
+} */
+/* void	free_window(t_window *window)
+{
+	if (window->wall)
+        mlx_delete_image(window->mlx, window->wall);
+    if (window->collectible)
+        mlx_delete_image(window->mlx, window->collectible);
+    if (window->player_l)
+        mlx_delete_image(window->mlx, window->player_l);
+	if (window->player_r)
+    	mlx_delete_image(window->mlx, window->player_r);
+	if (window->player_u)
+        mlx_delete_image(window->mlx, window->player_u);
+	if (window->player_d)
+        mlx_delete_image(window->mlx, window->player_d);
+    if (window->floor)
+        mlx_delete_image(window->mlx, window->floor);
+    if (window->exit_close)
+        mlx_delete_image(window->mlx, window->exit_close);
+    if (window->exit_open)
+        mlx_delete_image(window->mlx, window->exit_open);
+	if (window->exit_open_open)
+    	mlx_delete_image(window->mlx, window->exit_open_open);
+	if (window->exit_player)
+        mlx_delete_image(window->mlx, window->exit_player);
+    if (window->mlx)
+		mlx_terminate(window->mlx);
+    if (window)
+    	free(window);
+} */
+
+void free_window(t_window *window)
+{
+    if (window->wall)
+        mlx_delete_image(window->mlx, window->wall);
+    if (window->collectible)
+        mlx_delete_image(window->mlx, window->collectible);
+    if (window->player_l)
+        mlx_delete_image(window->mlx, window->player_l);
+    if (window->player_r)
+        mlx_delete_image(window->mlx, window->player_r);
+    if (window->player_u)
+        mlx_delete_image(window->mlx, window->player_u);
+    if (window->player_d)
+        mlx_delete_image(window->mlx, window->player_d);
+    if (window->floor)
+        mlx_delete_image(window->mlx, window->floor);
+    if (window->exit_close)
+        mlx_delete_image(window->mlx, window->exit_close);
+    if (window->exit_open)
+        mlx_delete_image(window->mlx, window->exit_open);
+    if (window->exit_open_open)
+        mlx_delete_image(window->mlx, window->exit_open_open);
+    if (window->exit_player)
+        mlx_delete_image(window->mlx, window->exit_player);
+    if (window->mlx)
+        mlx_terminate(window->mlx);
+    if (window)
+        free(window);
+}
+
+void	free_data(t_data *data)
+{
+	if (data)
+	{
+		if (data->coor_char != NULL)
+			free(data->coor_char);
+		if (data->coor_exit != NULL)
+			free(data->coor_exit);
+		if (data->map != NULL)
+			free_split(data->map);
+		if (data->size != NULL)
+			free(data->size);
+		if (data->window != NULL)
+			free_window(data->window);
+		free(data);
+		data = NULL;
+	}
+}

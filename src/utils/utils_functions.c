@@ -49,3 +49,9 @@ char	**deep_copy(char **original)
 	copy[i] = NULL;
 	return (copy);
 }
+
+void error(void)
+{
+	puts(mlx_strerror(mlx_errno));
+	exit(EXIT_FAILURE);
+}

@@ -40,7 +40,7 @@ static int	*find_character(char **map)
 }
 
 // Counts how many collectibles C are on a map.
-static int	find_collectionables(char **map)
+int	find_collectionables(char **map)
 {
 	int	i;
 	int	j;
@@ -114,8 +114,10 @@ int	check_way(char *map)
 	if (cont[1] == 1 && cont[0] == (int)find_collectionables(m))
 	{
 		free_split(m);
+		free(cont);
 		return (0);
 	}
 	free_split(m);
+	free(cont);
 	return (1);
 }
