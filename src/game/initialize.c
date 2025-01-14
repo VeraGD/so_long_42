@@ -72,12 +72,14 @@ t_window    *initiaize_window(int *size)
     window->player_l = load_texture(mlx, "imgs/vaca_l.png");
     window->player_r = load_texture(mlx, "imgs/vaca_r.png");
     window->player_u = load_texture(mlx, "imgs/vaca_u.png");
-    window->player_d = load_texture(mlx, "imgs/vaca_d.png");
+    window->player_d = load_texture(mlx, "imgs/vaca_ddd.png");
     window->floor = load_texture(mlx, "imgs/fondo_b.png");
     window->exit_close = load_texture(mlx, "imgs/puerta_c.png");
-    window->exit_open = load_texture(mlx, "imgs/puerta_a.png");
-    window->exit_open_open = load_texture(mlx, "imgs/exit_oo.png");
-    window->exit_player = load_texture(mlx, "imgs/over_exit.png");
+    window->exit_open = load_texture(mlx, "imgs/exit_oo.png");
+    window->exit_l = load_texture(mlx, "imgs/over_exit.png");
+    window->exit_r = load_texture(mlx, "imgs/over_r.png");
+    window->exit_u = load_texture(mlx, "imgs/over_u.png");
+    window->exit_d = load_texture(mlx, "imgs/over_d.png");
     return (window);
 }
 
@@ -96,12 +98,15 @@ t_data    *initiaize_data(char *map)
 {
     char    **map_double;
     char    **map_copy;
+    char    **map_copy2;
     t_data  *data;
 
     map_double = ft_split(map, '\n');
     map_copy = deep_copy(map_double);
+    map_copy2 = deep_copy(map_double);
     data = (t_data *)malloc(sizeof(t_data));
     data->map = map_copy;
+    data->map_print = map_copy2;
     data->collectionables = find_collectionables(map_copy);
     data->coor_char = find_char(map_copy, 'P');
     data->size = get_size_map(map_copy);
@@ -112,6 +117,7 @@ t_data    *initiaize_data(char *map)
     data->upper_exit = 'n';
     data->mov = generate_zeros();
     data->prev = generate_zeros();
+    data->cont = 0;
     free_split(map_double);
     return (data);
 }

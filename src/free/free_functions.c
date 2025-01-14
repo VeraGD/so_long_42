@@ -95,28 +95,32 @@ void	free_map_number(char **copy, size_t j)
 
 void free_window(t_window *window)
 {
-    if (window->wall)
+	if (window->wall)
         mlx_delete_image(window->mlx, window->wall);
-    if (window->collectible)
+	if (window->collectible)
         mlx_delete_image(window->mlx, window->collectible);
-    if (window->player_l)
+	if (window->player_l)
         mlx_delete_image(window->mlx, window->player_l);
-    if (window->player_r)
+	if (window->player_r)
         mlx_delete_image(window->mlx, window->player_r);
-    if (window->player_u)
+	if (window->player_u)
         mlx_delete_image(window->mlx, window->player_u);
-    if (window->player_d)
+	if (window->player_d)
         mlx_delete_image(window->mlx, window->player_d);
-    if (window->floor)
+	if (window->floor)
         mlx_delete_image(window->mlx, window->floor);
-    if (window->exit_close)
+	if (window->exit_close)
         mlx_delete_image(window->mlx, window->exit_close);
-    if (window->exit_open)
+	if (window->exit_open)
         mlx_delete_image(window->mlx, window->exit_open);
-    if (window->exit_open_open)
-        mlx_delete_image(window->mlx, window->exit_open_open);
-    if (window->exit_player)
-        mlx_delete_image(window->mlx, window->exit_player);
+	if (window->exit_l)
+        mlx_delete_image(window->mlx, window->exit_l);
+	if (window->exit_r)
+		mlx_delete_image(window->mlx, window->exit_r);
+	if (window->exit_u)
+		mlx_delete_image(window->mlx, window->exit_u);
+	if (window->exit_d)
+		mlx_delete_image(window->mlx, window->exit_d);
     if (window->mlx)
         mlx_terminate(window->mlx);
     if (window)
@@ -133,8 +137,14 @@ void	free_data(t_data *data)
 			free(data->coor_exit);
 		if (data->map != NULL)
 			free_split(data->map);
+		if (data->map_print != NULL)
+			free_split(data->map_print);
 		if (data->size != NULL)
 			free(data->size);
+		if (data->prev != NULL)
+			free(data->prev);
+		if (data->mov != NULL)
+			free(data->mov);
 		if (data->window != NULL)
 			free_window(data->window);
 		free(data);

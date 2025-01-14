@@ -1,5 +1,19 @@
 #include "../../so_long.h"
 
+void map_print(t_data *data)
+{
+    if (data->map[data->prev[0]][data->prev[1]] == 'E')
+    {
+        data->map_print[data->prev[0]][data->prev[1]] = 'E';
+        data->map_print[data->mov[0]][data->mov[1]] = 'P';
+    }
+    else
+    {
+        data->map_print[data->prev[0]][data->prev[1]] = '0';
+        data->map_print[data->mov[0]][data->mov[1]] = 'P';
+    }
+}
+
 void draw_floor(t_window *window, t_data *data)
 {
     int col;
@@ -10,13 +24,21 @@ void draw_floor(t_window *window, t_data *data)
     if (data->upper_exit == 'y' && data->map[data->prev[0]][data->prev[1]] == 'E')
         mlx_image_to_window(window->mlx, window->exit_close, col, row);
     else if (data->upper_exit == 'y' && data->map[data->prev[0]][data->prev[1]] == '0')
-    {
-        ft_printf("encimaaa");
         mlx_image_to_window(window->mlx, window->floor, col, row);
-    }
     else
         mlx_image_to_window(window->mlx, window->floor, col, row);
-    
+}
+
+void draw_player_over(t_window *window, t_data *data, int row, int col)
+{
+    if (data->direction == 'r')
+        mlx_image_to_window(window->mlx, window->exit_r, col, row);
+    else if (data->direction == 'l')
+        mlx_image_to_window(window->mlx, window->exit_l, col, row);
+    else if (data->direction == 'u')
+        mlx_image_to_window(window->mlx, window->exit_u, col, row);
+    else if (data->direction == 'd')
+        mlx_image_to_window(window->mlx, window->exit_d, col, row);
 }
 
 void draw_player(t_window *window, t_data *data)
@@ -27,7 +49,7 @@ void draw_player(t_window *window, t_data *data)
     col = data->mov[1] * 100;
     row = data->mov[0] * 100;
     if (data->upper_exit == 'y' && data->map[data->mov[0]][data->mov[1]] == 'E')
-        mlx_image_to_window(window->mlx, window->exit_player, col, row);
+        draw_player_over(window, data, row, col);
     else if (data->direction == 'r')
         mlx_image_to_window(window->mlx, window->player_r, col, row);
     else if (data->direction == 'l')
@@ -36,6 +58,8 @@ void draw_player(t_window *window, t_data *data)
         mlx_image_to_window(window->mlx, window->player_d, col, row);
     else if (data->direction == 'u')
         mlx_image_to_window(window->mlx, window->player_u, col, row);
+    map_print(data);
+
 }
 
 /* void valid_move(t_data *data, int x, int y)
@@ -175,6 +199,14 @@ void draw_player(t_window *window, t_data *data)
     draw_player(window, data);
 } */
 
+void exit_game(t_window *window)
+{
+    mlx_close_window(window->mlx);
+    window->mlx = NULL;
+    ft_printf("YOU WIN!\n");
+    exit(0);
+}
+
 void made_move(t_data *data, t_window *window)
 {
 
@@ -183,23 +215,19 @@ void made_move(t_data *data, t_window *window)
         data->collectionables--;
         if (data->collectionables == 0)
         {
-            if (mlx_image_to_window(window->mlx, window->exit_open_open, data->coor_exit[1] * 100, data->coor_exit[0] * 100) < 0)
+            if (mlx_image_to_window(window->mlx, window->exit_open, data->coor_exit[1] * 100, data->coor_exit[0] * 100) < 0)
                 error();
             data->exit_status = 'o';
         }
-        data->map[data->prev[0]][data->prev[1]] = '0';
-        data->map[data->mov[0]][data->mov[1]] = 'P';
         draw_floor(window, data);
         draw_player(window, data);
     }
     if (data->map[data->mov[0]][data->mov[1]] == 'E')
     {
         if (data->exit_status == 'c')
-        {
             data->upper_exit = 'y';
-        }
         else
-            ft_printf("GANAAA\n");
+            exit_game(window);
         draw_floor(window, data);
         draw_player(window, data);
     }
@@ -255,26 +283,35 @@ void move_right(t_data *data, t_window *window)
     }
 }
 
+void print_map(t_data *data)
+{
+    int len;
+    int i;
+
+    len = ft_len_double(data->map_print);
+    i = 0;
+    while (i < len)
+    {
+        ft_printf("%s\n", data->map_print[i]);
+        i++;
+    }
+}
+
 void check_direction(t_data *data, t_window *window)
 {
     data->prev[0] = data->coor_char[0];
     data->prev[1] = data->coor_char[1];
+    data->cont++;
     if (data->direction == 'u')
-    {
         move_up(data, window);
-    }
     else if (data->direction == 'd')
-    {
         move_down(data, window);
-    }
     else if (data->direction == 'l')
-    {
         move_left(data, window);
-    }
     else if (data->direction == 'r')
-    {
         move_right(data, window);
-    }
+    print_map(data);
+    ft_printf("Moves: %d\n", data->cont);
 }
 
 void check_exit(mlx_key_data_t key_data, t_window *window)
@@ -283,6 +320,7 @@ void check_exit(mlx_key_data_t key_data, t_window *window)
     {
         mlx_close_window(window->mlx);
         window->mlx = NULL;
+        ft_printf("You closed the game");
         exit(0);
     }
 }

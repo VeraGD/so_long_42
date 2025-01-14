@@ -14,7 +14,7 @@ static void aux_rendering(int i, int j, t_window *window, t_data *data)
     }
     else if (data->map[i][j] == 'P')
     {
-        if (mlx_image_to_window(window->mlx, window->player_r, j * 100, i * 100) < 0)
+        if (mlx_image_to_window(window->mlx, window->player_d, j * 100, i * 100) < 0)
             error();
     }
 }

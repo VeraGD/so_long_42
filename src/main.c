@@ -1,14 +1,16 @@
 #include "../so_long.h"
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 
-/* void close_window(void *param)
+void close_window(void* param)
 {
-    t_data *data = (t_data *)param;
-    ft_printf("Ventana cerrada.\n");
-    free_data(data); // Libera todos los recursos
-    mlx_terminate(data->window->mlx); // Termina la conexión con MLX
-    exit(0);
-} */
+    t_data *data = (t_data*)param;
+    if (data && data->window && data->window->mlx)
+    {
+        mlx_terminate(data->window->mlx);
+        ft_printf("You closed the game");
+        exit(EXIT_SUCCESS);
+    }
+}
 
 int     main(int argc, char **argv)
 {
@@ -28,25 +30,15 @@ int     main(int argc, char **argv)
             {
                 if (check_chars(map) == 0 && check_number_chars(map) == 0 && check_walls(map) == 0 && check_way(map) == 0)
                 {
-                        ft_printf("%s\n", map);
-                        ft_printf("entra");
                         data = initiaize_data(map);
-                        /* ft_printf("size: %d, %d\n", data->size[0], data->size[1]);
-                        ft_printf("coord: %d, %d\n", data->coor_char[0], data->coor_char[1]);
-                        ft_printf("coord: %d, %d\n", data->coor_exit[0], data->coor_exit[1]);
-                        ft_printf("collectionales: %d\n", data->collectionables);
-                        ft_printf("first_line: %s\n", data->map[0]); */
+                        print_map(data);
+                        ft_printf("GAME START\n");
+                        free(map);
                         window = data->window;
                         rendering(data, window);
                         mlx_key_hook(window->mlx, handle_input, data);
-                        //mlx_hook(window->mlx, 17, 0, close_window, data);
+                        mlx_close_hook(window->mlx, close_window, data);
                         mlx_loop(window->mlx);
-                        free(map);
-                        /* free_split(data->map);
-                        free(data->coor_char);
-                        free(data->size);
-                        free(data);
-                        free_window(window); */
                         free_data(data); // YA ESTOY LIBERANDO WINDOW CON ESTO (DOS WINDOW)
                         mlx_terminate(window->mlx);
                 }
