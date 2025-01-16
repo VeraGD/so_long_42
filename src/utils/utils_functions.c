@@ -6,7 +6,7 @@
 /*   By: veragarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 16:41:30 by veragarc          #+#    #+#             */
-/*   Updated: 2024/12/13 16:43:42 by veragarc         ###   ########.fr       */
+/*   Updated: 2025/01/16 12:02:30 by veragarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	**deep_copy(char **original)
 	return (copy);
 }
 
-void error(void)
+void	error(void)
 {
 	puts(mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);

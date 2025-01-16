@@ -41,62 +41,19 @@ static char	*fill_line_buffer(int fd, char *stash, char *buffer)
 	return (stash);
 }
 
-/* static char	*set_line(char *line_buffer)
+static char	*set_line(char *line_buf)
 {
 	size_t	i;
 	char	*stash;
 
 	i = 0;
-	while (line_buffer[i] != '\0' && line_buffer[i] != '\n')
-	{
-		if (line_buffer[i] == '\n')
-			break ;
-		else
-			i++;
-	}
-	stash = ft_substr(line_buffer, i + 1, ft_strlen(line_buffer) - i);
-	if (*stash == 0)
-	{
-		free(stash);
-		return (NULL);
-	}
-	line_buffer[i + 1] = '\0';
-	return (stash);
-} */
-//BUENA
-/* static char	*set_line(char *line_buffer)
-{
-	size_t	i;
-	char	*stash;
-
-	i = 0;
-	while (line_buffer[i] != '\0' && line_buffer[i] != '\n')
+	while (line_buf[i] != '\0' && line_buf[i] != '\n')
 		i++;
-	if (line_buffer[i] == '\n')
-		stash = ft_substr(line_buffer, i + 1, ft_strlen(line_buffer) - i - 1);
+	if (line_buf[i] == '\n')
+		stash = ft_substr_gnl(line_buf, i + 1, ft_strlen_gnl(line_buf) - i - 1);
 	else
 		stash = NULL;
-	line_buffer[i] = '\0';
-	if (stash && *stash == '\0') {
-		free(stash);
-		stash = NULL;
-	}
-	return (stash);
-} */
-
-static char	*set_line(char *line_buffer)
-{
-	size_t	i;
-	char	*stash;
-
-	i = 0;
-	while (line_buffer[i] != '\0' && line_buffer[i] != '\n')
-		i++;
-	if (line_buffer[i] == '\n')
-		stash = ft_substr_gnl(line_buffer, i + 1, ft_strlen_gnl(line_buffer) - i - 1);
-	else
-		stash = NULL;
-	line_buffer[i] = '\0';
+	line_buf[i] = '\0';
 	if (stash && *stash == '\0')
 	{
 		free(stash);
@@ -128,28 +85,3 @@ char	*get_next_line(int fd)
 	stash = set_line(line);
 	return (line);
 }
-
-/* int	main(void)
-{
-    char*	fileName = "hola.txt";
-    int		fd;
-    char*	line;
-
-    fd = open(fileName, O_RDWR);
-    line = (char *) 1;
-    if (fd == -1)
-    {
-        printf("Error openning file\n");
-        return (-1);
-    }
-    while (line)
-    {
-        line = get_next_line(fd);
-        if (line)
-        {	
-            printf("Resultado: %s", line);
-            free(line);
-        } 
-    }
-    return (0);
-} */
