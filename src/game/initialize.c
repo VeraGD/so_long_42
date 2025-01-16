@@ -23,16 +23,16 @@ static t_window	*initiaize_window(int *size)
 	if (!mlx)
 		error();
 	window->mlx = mlx;
-	window->wall = load_texture(mlx, "imgs/arbusto_b.png");
-	window->collectible = load_texture(mlx, "imgs/adn_b.png");
-	window->player_l = load_texture(mlx, "imgs/vaca_l.png");
-	window->player_r = load_texture(mlx, "imgs/vaca_r.png");
-	window->player_u = load_texture(mlx, "imgs/vaca_u.png");
-	window->player_d = load_texture(mlx, "imgs/vaca_ddd.png");
-	window->floor = load_texture(mlx, "imgs/fondo_b.png");
-	window->exit_close = load_texture(mlx, "imgs/puerta_c.png");
-	window->exit_open = load_texture(mlx, "imgs/exit_oo.png");
-	window->exit_l = load_texture(mlx, "imgs/over_exit.png");
+	window->wall = load_texture(mlx, "imgs/bush.png");
+	window->collectible = load_texture(mlx, "imgs/dna.png");
+	window->player_l = load_texture(mlx, "imgs/cow_l.png");
+	window->player_r = load_texture(mlx, "imgs/cow_r.png");
+	window->player_u = load_texture(mlx, "imgs/cow_u.png");
+	window->player_d = load_texture(mlx, "imgs/cow_d.png");
+	window->floor = load_texture(mlx, "imgs/background.png");
+	window->exit_close = load_texture(mlx, "imgs/exit_c.png");
+	window->exit_open = load_texture(mlx, "imgs/exit_o.png");
+	window->exit_l = load_texture(mlx, "imgs/over_l.png");
 	window->exit_r = load_texture(mlx, "imgs/over_r.png");
 	window->exit_u = load_texture(mlx, "imgs/over_u.png");
 	window->exit_d = load_texture(mlx, "imgs/over_d.png");

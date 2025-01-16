@@ -66,7 +66,6 @@ void	check_direction(t_data *data, t_window *window)
 {
 	data->prev[0] = data->coor_char[0];
 	data->prev[1] = data->coor_char[1];
-	data->cont++;
 	if (data->direction == 'u')
 		move_up(data, window);
 	else if (data->direction == 'd')
@@ -75,5 +74,4 @@ void	check_direction(t_data *data, t_window *window)
 		move_left(data, window);
 	else if (data->direction == 'r')
 		move_right(data, window);
-	ft_printf("Moves: %d\n", data->cont);
 }

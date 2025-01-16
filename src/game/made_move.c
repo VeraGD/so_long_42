@@ -6,7 +6,7 @@
 /*   By: veragarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 11:01:20 by veragarc          #+#    #+#             */
-/*   Updated: 2025/01/16 11:38:47 by veragarc         ###   ########.fr       */
+/*   Updated: 2025/01/16 12:57:14 by veragarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	exit_game(t_window *window, t_data *data)
 {
 	mlx_close_window(window->mlx);
 	window->mlx = NULL;
+	ft_printf("Moves: %d\n", data->cont + 1);
 	ft_printf("YOU WIN!\n");
 	free(data);
 	exit(0);
@@ -64,4 +65,6 @@ void	made_move(t_data *data, t_window *window)
 		draw_player(window, data);
 		data->upper_exit = 'n';
 	}
+	data->cont++;
+	ft_printf("Moves: %d\n", data->cont);
 }
