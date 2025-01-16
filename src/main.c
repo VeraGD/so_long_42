@@ -6,7 +6,7 @@
 /*   By: veragarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:14:34 by veragarc          #+#    #+#             */
-/*   Updated: 2025/01/16 12:21:31 by veragarc         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:15:18 by veragarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	close_window(void *param)
 	data = (t_data *)param;
 	if (data && data->window && data->window->mlx)
 	{
-		mlx_terminate(data->window->mlx);
+		free_data(data);
 		ft_printf("You closed the game\n");
 		exit(EXIT_SUCCESS);
 	}

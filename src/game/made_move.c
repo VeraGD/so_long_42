@@ -15,11 +15,10 @@
 // game closes if you win
 static void	exit_game(t_window *window, t_data *data)
 {
-	mlx_close_window(window->mlx);
-	window->mlx = NULL;
+	(void)window;
 	ft_printf("Moves: %d\n", data->cont + 1);
+	free_data(data);
 	ft_printf("YOU WIN!\n");
-	free(data);
 	exit(0);
 }
 

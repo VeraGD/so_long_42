@@ -6,19 +6,18 @@
 /*   By: veragarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 11:21:01 by veragarc          #+#    #+#             */
-/*   Updated: 2025/01/16 11:38:04 by veragarc         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:14:52 by veragarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../so_long.h"
 
 // Pressing the ESC key closes the game
-static void	check_exit(mlx_key_data_t key_data, t_window *window)
+static void	check_exit(mlx_key_data_t key_data, t_data *data)
 {
 	if (key_data.key == MLX_KEY_ESCAPE && key_data.action == MLX_PRESS)
 	{
-		mlx_close_window(window->mlx);
-		window->mlx = NULL;
+		free_data(data);
 		ft_printf("You closed the game\n");
 		exit(0);
 	}
@@ -52,7 +51,7 @@ void	handle_input(mlx_key_data_t key_data, void *param)
 
 	data = (t_data *)param;
 	window = data->window;
-	check_exit(key_data, window);
+	check_exit(key_data, data);
 	if ((key_data.key == MLX_KEY_W || key_data.key == MLX_KEY_UP)
 		&& key_data.action == MLX_PRESS)
 	{
