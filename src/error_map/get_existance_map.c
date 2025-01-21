@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../so_long.h"
+#include "../../include/so_long.h"
 
 // If the map file exists, returns its fd (only checks read permissions).
 int	check_map_existance(char *map)

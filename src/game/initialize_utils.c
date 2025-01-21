@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../so_long.h"
+#include "../../include/so_long.h"
 
 // returns as int * the coordinates in which the character is located
 // (rows, columns)

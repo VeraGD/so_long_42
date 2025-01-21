@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../so_long.h"
+#include "../../include/so_long.h"
 
 static char	*fill_line_buffer(int fd, char *stash, char *buffer)
 {

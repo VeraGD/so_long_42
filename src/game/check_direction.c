@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../so_long.h"
+#include "../../include/so_long.h"
 
 // get and change the coordinates to move upwards
 static void	move_up(t_data *data, t_window *window)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../so_long.h"
+#include "../../include/so_long.h"
 
 // Pressing the ESC key closes the game
 static void	check_exit(mlx_key_data_t key_data, t_data *data)

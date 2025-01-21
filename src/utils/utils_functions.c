@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../so_long.h"
+#include "../../include/so_long.h"
 
 // Calculates length of how many char * there are in a char **.
 size_t	ft_len_double(char **argv)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../so_long.h"
+#include "../../include/so_long.h"
 
 // draws the floor each time the character passes
 void	draw_floor(t_window *window, t_data *data)

@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include "lib/MLX42/include/MLX42/MLX42.h"
+# include "MLX42/include/MLX42/MLX42.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42

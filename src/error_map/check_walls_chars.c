@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../so_long.h"
+#include "../../include/so_long.h"
 
 // Check that the map consists only of valid characters (1, 0, E, P, C).
 int	check_chars(char *map)

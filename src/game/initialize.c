@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../so_long.h"
+#include "../../include/so_long.h"
 
 // initializes the MLX structure (mlx and textures used)
 static t_window	*initiaize_window(int *size)

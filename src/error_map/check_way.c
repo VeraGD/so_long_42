@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../so_long.h"
+#include "../../include/so_long.h"
 
 // Gets the position of the character, returns an int *, (row, column).
 static int	*find_character(char **map)

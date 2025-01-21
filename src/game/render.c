@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../so_long.h"
+#include "../../include/so_long.h"
 
 static void	aux_rendering(int i, int j, t_window *window, t_data *data)
 {
