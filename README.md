@@ -64,7 +64,7 @@ Several examples can be found in the maps folder:
   $> make clean_mlx
   ```
 
-  ## 4. Images of the game
+## 4. Images of the game
 - Mandatory part:
 
 | map1.ber | map2.ber |
