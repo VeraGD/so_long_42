@@ -65,6 +65,21 @@ Several examples can be found in the maps folder:
   ```
 
   ## 4. Images of the game
-  - Mandatory part.
+- Mandatory part:
+
+| map1.ber | map2.ber |
+|-------|----------------|
+| ![Alt Imagen 1](images_repo/mandatory_2.png) | ![Alt Imagen 2](images_repo/mandatory_1.png) |
     
-  - Bonus part.
+- Bonus part (mapbonus1.ber):
+
+| Start | First Evolution |
+|-------|----------------|
+| ![Alt Imagen 1](images_repo/bonus_1.png) | ![Alt Imagen 2](images_repo/bonus_2.png) |
+
+| Second Evolution | Third Evolution |
+|------------------|-----------------|
+| ![Alt Imagen 3](images_repo/bonus_3.png) | ![Alt Imagen 4](images_repo/bonus_4.png) |
+
+
+
